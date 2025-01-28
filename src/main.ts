@@ -7,7 +7,7 @@ async function bootstrap() {
   // Use PORT from the environment or default to 3000
   const port = process.env.PORT || 3000;
   app.enableCors(); // Allow cross-origin requests from the frontend
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(env(PORT) ?? 3000);
 
   console.log(`Application is running on: http://localhost:${port}`);
 }
