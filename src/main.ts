@@ -8,7 +8,7 @@ async function bootstrap() {
 
   console.log("Checking PORT environment variable:", process.env.PORT);
   
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT;
   
   console.log(`About to start server on port: ${port}`);
   
