@@ -1,14 +1,43 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import * as bcrypt from 'bcrypt';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  
-  // Use PORT from the environment or default to 3000
-  const port = process.env.PORT || 3000;
-  app.enableCors(); // Allow cross-origin requests from the frontend
-  await app.listen(port);
+@Injectable()
+export class AuthService {
+  constructor(private readonly prisma: PrismaService) {}
 
-  console.log(`Application is running on: http://localhost:${port}`);
+  async register(email: string, password: string) {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert the user into the database
+    const user = await this.prisma.user.create({
+      data: {
+        email,
+        password: hashedPassword,
+      },
+    });
+
+    return { message: 'User registered successfully', user };
+  }
+
+  async login(email: string, password: string) {
+    // Fetch the user from the database
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      throw new Error('Invalid credentials');
+    }
+
+    // Compare the provided password with the hashed password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      throw new Error('Invalid credentials');
+    }
+
+    return { message: 'User logged in successfully', user };
+  }
 }
-bootstrap();
