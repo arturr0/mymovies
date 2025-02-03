@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (rating && !isNaN(rating) && rating >= 1 && rating <= 5) {
             try {
-                const response = await fetch(`http://localhost:3000/movies/rate`, {
+                const response = await fetch(`https://nest-db.onrender.com/movies/rate`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,
