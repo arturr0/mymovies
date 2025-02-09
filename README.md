@@ -5,7 +5,6 @@ This is a **NestJS-based API** for ranking movies and movie-related people. The 
 ## Features
 - **User Authentication**: Secure login and registration using **JWT** and **bcrypt** for password hashing.
 - **Movie & People Ranking**: Users can vote and rank movies, actors, and directors.
-- **Posts stored in database**: All posts are stored in a PostgreSQL database.
 - **Real-time Updates**: Utilizes **Server-Sent Events (SSE)** to push live updates to clients.
 - **RESTful API**: Provides structured API endpoints for managing movies, rankings, and users.
 - **Movie Data from TMDB**: Movies and related data are sourced from [The Movie Database (TMDB)](https://www.themoviedb.org/).
@@ -26,12 +25,12 @@ This is a **NestJS-based API** for ranking movies and movie-related people. The 
 
 ### **Movies**
 - `GET /movies` - Get all movies
-- `GET /movies/protected` - Get protected movie data (Auth required)
+- `GET /movies/protected` - Get protected movie data (Authorization required)
 - `GET /movies/search` - Search for movies or people (Actor, Director, or Title)
-- `POST /movies/rate` - Rate a movie or a person (Auth required)
+- `POST /movies/rate` - Rate a movie or a person (Authorization required)
 
 ### **Ranking**
-- `POST /movies/:id/rank` - Rank a movie (Auth required)
+- `POST /movies/:id/rank` - Rank a movie (Authorization required)
 - `GET /movies/:id/rank` - Get movie ranking
 
 ### **SSE (Real-time updates)**
