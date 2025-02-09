@@ -7,7 +7,7 @@ async function bootstrap() {
 	// Use PORT from the environment or default to 3000
 	const port = process.env.PORT || 3000;
 	app.enableCors({
-		origin: 'http://localhost:3000', // Match frontend origin
+		origin: 'https://nest-db.onrender.com', // Match frontend origin
 		credentials: true
 	});
 	
