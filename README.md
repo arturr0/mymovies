@@ -20,7 +20,7 @@ This is a **NestJS-based API** for ranking movies and movie-related people. The 
 
 ## API Endpoints
 
-### **Auth**
+### **Authorization**
 - `POST /auth/register` - Register a new user
 - `POST /auth/login` - Login and get JWT token
 
